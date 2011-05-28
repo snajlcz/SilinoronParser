@@ -6,7 +6,7 @@ namespace SilinoronParser.Parsing.Parsers
 {
     public static class GuildHandler
     {
-        [Parser(Opcode.SMSG_GUILD_INFO)]
+        [Parser(Index.HandleGuildInfoIndex)]
         public static void HandleGuildInfo(Packet packet)
         {
             packet.ReadCString("Name");

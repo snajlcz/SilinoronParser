@@ -57,17 +57,20 @@ namespace SilinoronParser.Parsing.Parsers
             return info;
         }
 
-        [Parser(Opcode.MSG_MOVE_HEARTBEAT)]
-        [Parser(Opcode.MSG_MOVE_SET_PITCH)]
-        [Parser(Opcode.MSG_MOVE_SET_FACING)]
+        [ClientToServerParser(Opcode.MSG_MOVE_HEARTBEAT)]
+        [ClientToServerParser(Opcode.MSG_MOVE_SET_PITCH)]
+        [ClientToServerParser(Opcode.MSG_MOVE_SET_FACING)]
+        [Parser(Index.HandleHeartbeatIndex)]
+        [Parser(Index.HandleSetPitchIndex)]
+        [Parser(Index.HandleSetFacingIndex)]
         public static void ParseMovementPackets(Packet packet)
         {
             var guid = packet.ReadPackedGuid("Guid");
             ReadMovementInfo(packet, guid);
         }
 
-        [Parser(Opcode.SMSG_MONSTER_MOVE)]
-        [Parser(Opcode.SMSG_MONSTER_MOVE_TRANSPORT)]
+        [Parser(Index.HandleMonsterMoveIndex)]
+        [Parser(Index.HandleMonsterMoveTransportIndex)]
         public static void ParseMonsterMovePackets(Packet packet)
         {
             var guid = packet.ReadPackedGuid("GUID");
